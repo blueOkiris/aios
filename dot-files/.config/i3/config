@@ -1,4 +1,4 @@
-# Dylan's i3 Config
+# AIOS i3 Config
 
 set $mod Mod4
 
@@ -117,17 +117,10 @@ gaps inner 20
 gaps outer 0
 smart_gaps on
 
-# Handle displays and launch bar (along with tray stuff after)
-exec $HOME/.config/i3/arandr.sh
-exec brightnessctl set 100%
-
-# Background stuff
+# Start-up stuff
 exec_always --no-startup-id $HOME/Applications/i3-alternating-layout/alternating_layouts.py
-exec --no-startup-id spotifyd
 exec_always --no-startup-id /usr/libexec/kf5/polkit-kde-authentication-agent-1
-
-# Turn on numlock
-exec_always --no-startup-id numlockx on
-
-exec msi-perkeyrgb --model GE75 -p chakra
+exec --no-startup-id xfce4-panel --disable-wm-check
+exec_always --no-startup-id nm-applet
+exec_always --no-startup-id blueman-applet
 
