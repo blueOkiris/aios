@@ -14,4 +14,4 @@ On top of that, we strive to bring you a customized desktop environment built ar
 
 You will need `livecd-creator`
 
-`sudo livecd-creator aios-live.ks`
+Simply: `sudo livecd-creator --config=fedora-live-i3.ks --cache=cache --fslabel=aios-remix`
