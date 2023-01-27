@@ -18,13 +18,22 @@ You will need `Fedora`, `lorax`, and `pykickstart`
 
 Probably want to build in a VM or container (so you don't accidentally write over your own system or something), but I didn't, so...
 
-Run:
+Run
 
 ```
 sudo ksflatten -c aios-live.ks -o flatten.ks \
     && sudo livemedia-creator --make-iso --ks flatten.ks \
         --iso-only --no-virt \
-        --iso-name AppImageOS-37 --releasever 37 \
+        --iso-name AppImageOS-37-x86_64.iso --releasever 37 \
         --tmp tmp
 ```
+
+to build it, and then
+
+```
+sudo cp tmp/<whatever lmc-* folder it's in>/AppImageOS-37-x86_64.iso .
+sudo chown $USER:$USER AppImageOS-37-x86_64.iso
+```
+
+to copy it to the current dir and allow you to run it.
 
