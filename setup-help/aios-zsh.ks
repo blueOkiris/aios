@@ -20,6 +20,18 @@ else
     git clone https://github.com/blueOkiris/aios /tmp/aios
     cp -r /tmp/aios/.oh-my-zsh \$HOME/.oh-my-zsh
     chown -R \$USER:\$USER \$HOME/.oh-my-zsh
+
+    if [ -d "\$HOME/.oh-my-zsh" ]; then
+        export ZSH="\$HOME/.oh-my-zsh"
+        ZSH_THEME="gentoo"
+
+        zstyle ':omz:update' mode auto      # update automatically without asking
+
+        plugins=(git zsh-completions zsh-syntax-highlighting zsh-autosuggestions)
+        autoload -U compinit && compinit
+
+        source \$ZSH/oh-my-zsh.sh
+    fi
 fi
 
 # User configuration
