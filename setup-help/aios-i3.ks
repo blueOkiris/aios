@@ -133,7 +133,7 @@ exec_always --no-startup-id nm-applet
 exec_always --no-startup-id blueman-applet
 
 # Live install launching
-exec --no-startup-id sh -c 'if [ "$USER" = "liveuser" ]; then liveinst; fi'
+exec --no-startup-id sh -c 'if [ "\$USER" = "liveuser" ]; then liveinst; fi'
 for_window [ title="Anaconda Installer" ] floating enable
 
 EOF
