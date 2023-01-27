@@ -9,9 +9,12 @@
 #
 # Modifications by: Dylan Turner <dylantdmt@gmail.com>
 
+# MODIFICATION: Force releasever
+releasever=37
+
 lang en_US.UTF-8
 keyboard us
-timezone US/Eastern
+timezone US/Central
 selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
