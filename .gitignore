@@ -4,4 +4,5 @@ flatten.ks
 # Build files
 *.iso
 *.log
+tmp/
 
