@@ -5,4 +5,5 @@ flatten.ks
 *.iso
 *.log
 tmp/
+anaconda/
 
