@@ -14,7 +14,7 @@ On top of that, we strive to bring you a customized desktop environment built ar
 
 ## Building the Live ISO
 
-You will need `livecd-creator`
+You will need `Fedora`, `lorax`, and `pykickstart`
 
 Run:
 
