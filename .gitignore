@@ -1,6 +1,7 @@
+# Flatten file
+flatten.ks
+
 # Build files
-cache/
-tmp/
 *.iso
-.kst*
+*.log
 

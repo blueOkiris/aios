@@ -1,5 +1,7 @@
 # AppImageOS (AIOS)
 
+NOTE: This project is not even CLOSE to being ready. Use at your own risk. I'll remove this after a real release
+
 ## Description
 
 The AppImageOS - Use your computer. Don't maintain it.
@@ -17,9 +19,9 @@ You will need `livecd-creator`
 Run:
 
 ```
-sudo livecd-creator --config=aios-live.ks \
-    --cache=cache --tmpdir=tmp \
-    --fslabel=AppImageOS-37 \
-    --verbose
+sudo ksflatten -c aios-live.ks -o flatten.ks \
+    && sudo livemedia-creator --make-iso --ks flatten.ks \
+        --iso-only --no-virt \
+        --iso-name AppImageOS-37 --releasever 37
 ```
 

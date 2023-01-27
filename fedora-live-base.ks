@@ -58,8 +58,6 @@ chkconfig
 %end
 
 %post
-# MODIFICATION: Force releasever
-releasever=37
 
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
