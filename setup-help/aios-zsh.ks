@@ -18,7 +18,7 @@ if [ -d "\$HOME/.oh-my-zsh" ]; then
     source \$ZSH/oh-my-zsh.sh
 else
     git clone https://github.com/blueOkiris/aios /tmp/aios
-    cp -r /tmp/aios-config/.oh-my-zsh \$HOME/.oh-my-zsh
+    cp -r /tmp/aios/.oh-my-zsh \$HOME/.oh-my-zsh
     chown -R \$USER:\$USER \$HOME/.oh-my-zsh
 fi
 
