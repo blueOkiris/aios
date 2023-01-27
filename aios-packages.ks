@@ -4,13 +4,9 @@
 %packages
 
 # Desktop packages
-@^i3-desktop-environment
--i3
--i3-config-fedora
 i3-gaps
 feh
 rofi
-pavucontrol
 dex-autostart
 xfce4-panel
 xfce4-datetime-plugin
@@ -34,9 +30,8 @@ thunar-media-tags-plugin
 thunar-volman
 alacritty
 neovim
-system-config-printer
 gnome-screenshot
-gnome-system-monitor
+google-noto-sans-fonts
 
 # Theming
 arc-theme
@@ -45,17 +40,21 @@ papirus-icon-theme
 
 # Used to install aip-man
 cargo
+openssl-devel
 
 # Keyring/password stuff
 -gnome-keyring
 polkit-kde
 
 # Admin tools are handy to have
-@admin-tools
-wget
-trash-cli
 git
 zsh
+zsh-syntax-highlighting
+zsh-autosuggestions
+
+# For nvim
+python-pip
+nodejs
 
 # Setup
 util-linux-user
@@ -75,6 +74,11 @@ util-linux-user
 -firefox
 -flatpak
 -gnome-disk-utility
+-gnome-system-monitor
+-system-config-printer
+-@^admin-tools
+-@^fonts
+-@^input-methods
 
 # Rebranding
 -fedora-logos
