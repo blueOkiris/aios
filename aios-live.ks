@@ -13,8 +13,26 @@
 # Remix
 sed -i -e 's/Generic release/AppImageOS 37 release/g' /etc/fedora-release /etc/issue
 
-# create /etc/sysconfig/desktop (needed for installation)
+# Fix avahi daemon
+sed -i -e 's/#disallow-other-stacks=no/disallow-other-stacks=yes/g' /etc/avahi/avahi-daemon.conf
 
+# Ensure polkit is set up properly
+getent group polkitd >/dev/null \
+    && echo -e "\e[1;32mpolkitd group already exists\e[0m" \
+    || { \
+        groupadd -r polkitd \
+            && echo -e "\e[1;33mAdded missing polkitd group\e[0m" \
+            || echo -e "\e[1;31mAdding polkitd group FAILED\e[0m"; \
+    }
+getent passwd polkitd >/dev/null \
+    && echo -e "\e[1;32mpolkitd user already exists\e[0m" \
+    || { \
+        useradd -r -g polkitd -d / -s /sbin/nologin -c "User for polkitd" polkitd \
+        && echo -e "\e[1;33mAdded missing polkitd user\e[0m" \
+        || echo -e "\e[1;31mAdding polkitd user FAILED\e[0m"; \
+    }
+
+# Create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/i3
 DISPLAYMANAGER=/usr/sbin/lightdm
@@ -22,32 +40,32 @@ EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-# deactivate xfconf-migration (#683161)
+# Deactivate xfconf-migration (#683161)
 rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
 
-# set up lightdm autologin
+# Set up lightdm autologin
 sed -i 's/^#autologin-user=.*/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
 sed -i 's/^#autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/lightdm.conf
 #sed -i 's/^#show-language-selector=.*/show-language-selector=true/' /etc/lightdm/lightdm-gtk-greeter.conf
 
-# set i3 as default session, otherwise login will fail
+# Set i3 as default session, otherwise login will fail
 sed -i 's/^#user-session=.*/user-session=i3/' /etc/lightdm/lightdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
 mkdir /home/liveuser/Desktop
 
-# this goes at the end after all other changes.
+# This goes at the end after all other changes.
 chown -R liveuser:liveuser /home/liveuser
 restorecon -R /home/liveuser
 
-# setting the wallpaper
+# Setting the wallpaper
 echo "/usr/bin/feh --bg-scale /usr/share/backgrounds/default.png" >> /home/liveuser/.profile
 
-# echoing type liveinst to start the installer
+# Echoing type liveinst to start the installer
 echo "echo 'Please type liveinst and press Enter to start the installer'" >> /home/liveuser/.zshrc
 
-# fixing the installer non opening bug
+# Fixing the installer non opening bug
 echo "xhost si:localuser:root" >> /home/liveuser/.profile
 
 EOF
