@@ -9,9 +9,6 @@
 #
 # Modifications by: Dylan Turner <dylantdmt@gmail.com>
 
-# MODIFICATION: Force releasever
-releasever=37
-
 lang en_US.UTF-8
 keyboard us
 timezone US/Central
@@ -61,6 +58,9 @@ chkconfig
 %end
 
 %post
+# MODIFICATION: Force releasever
+releasever=37
+
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
 #!/bin/bash
