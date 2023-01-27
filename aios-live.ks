@@ -14,7 +14,7 @@
 sed -i -e 's/Generic release/AppImageOS 37 release/g' /etc/fedora-release /etc/issue
 
 # Fix avahi daemon
-sed -i -e 's/#disallow-other-stacks=no/disallow-other-stacks=yes/g' /etc/avahi/avahi-daemon.conf
+adduser --system --shell /bin/false --home /var/run/avahi --disabled-password avahi
 
 # Ensure polkit is set up properly
 getent group polkitd >/dev/null \
