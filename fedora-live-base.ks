@@ -6,6 +6,8 @@
 #
 # Does includes "default" language configuration (kickstarts including
 # this template can override these settings)
+#
+# Modifications by: Dylan Turner <dylantdmt@gmail.com>
 
 lang en_US.UTF-8
 keyboard us
@@ -21,7 +23,7 @@ network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
 shutdown
 
-%include fedora-repo.ks
+%include repo.ks
 
 %packages
 # Explicitly specified here:
@@ -315,7 +317,6 @@ rm -f /etc/machine-id
 touch /etc/machine-id
 
 %end
-
 
 %post --nochroot
 # For livecd-creator builds only (lorax/livemedia-creator handles this directly)
