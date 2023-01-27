@@ -6,33 +6,69 @@
 # Write zsh config to home dir
 mkdir -p /home/liveuser
 cat > /home/liveuser/.zshrc << EOF
-if [ -d "\$HOME/.oh-my-zsh" ]; then
-    export ZSH="\$HOME/.oh-my-zsh"
-    ZSH_THEME="gentoo"
+# Plugins
 
-    zstyle ':omz:update' mode auto      # update automatically without asking
+if [ ! -d "\$HOME/.zsh-completions" ]; then
+    git clone https://github.com/zsh-users/zsh-completions.git \$HOME/.zsh-completions
+fi
+export fpath=(\$HOME/.zsh-completions/src \$fpath)
+autoload -U compinit && compinit
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/shhare/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-    plugins=(git zsh-completions zsh-syntax-highlighting zsh-autosuggestions)
-    autoload -U compinit && compinit
+# Theme
 
-    source \$ZSH/oh-my-zsh.sh
-else
-    git clone https://github.com/blueOkiris/aios /tmp/aios
-    cp -r /tmp/aios/.oh-my-zsh \$HOME/.oh-my-zsh
-    mv \$HOME/.oh-my-zsh/git \$HOME/.oh-my-zsh/.git
-    chown -R \$USER:\$USER \$HOME/.oh-my-zsh
+autoload -Uz colors && colors
 
-    if [ -d "\$HOME/.oh-my-zsh" ]; then
-        export ZSH="\$HOME/.oh-my-zsh"
-        ZSH_THEME="gentoo"
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '%F{red}*'   # display this when there are unstaged changes
+zstyle ':vcs_info:*' stagedstr '%F{yellow}+'  # display this when there are staged changes
+zstyle ':vcs_info:*' actionformats '%F{5}(%F{2}%b%F{3}|%F{1}%a%c%u%m%F{5})%f '
+zstyle ':vcs_info:*' formats '%F{5}(%F{2}%b%c%u%m%F{5})%f '
+zstyle ':vcs_info:svn:*' branchformat '%b'
+zstyle ':vcs_info:svn:*' actionformats '%F{5}(%F{2}%b%F{1}:%{3}%i%F{3}|%F{1}%a%c%u%m%F{5})%f '
+zstyle ':vcs_info:svn:*' formats '%F{5}(%F{2}%b%F{1}:%F{3}%i%c%u%m%F{5})%f '
+zstyle ':vcs_info:*' enable git cvs svn
+zstyle ':vcs_info:git*+set-message:*' hooks untracked-git
 
-        zstyle ':omz:update' mode auto      # update automatically without asking
++vi-untracked-git() {
+  if command git status --porcelain 2>/dev/null | command grep -q '??'; then
+    hook_com[misc]='%F{red}?'
+  else
+    hook_com[misc]=''
+  fi
+}
 
-        plugins=(git zsh-completions zsh-syntax-highlighting zsh-autosuggestions)
-        autoload -U compinit && compinit
+gentoo_precmd() {
+  vcs_info
+}
 
-        source \$ZSH/oh-my-zsh.sh
-    fi
+autoload -U add-zsh-hook
+add-zsh-hook precmd gentoo_precmd
+
+PROMPT='%(!.%B%F{red}.%B%F{green}%n@)%m %F{blue}%(!.%1~.%~) ${vcs_info_msg_0_}%F{blue}%(!.#.$)%k%b%f '
+
+# Install package manager
+
+if [ ! -f "\$HOME/.cargo/bin/aipman" ]; then
+    echo "Installing the aip-man..."
+    cargo install aipman
+    \$HOME/.cargo/bin/aipman install appimaged
+    chmod +x \$HOME/Applications/appimaged-*.AppImage
+    \$HOME/.cargo/bin/aipman run appimaged-*.AppImage
+
+    echo "Installing Firefox with `aipman install firefox`!"
+    \$HOME/.cargo/bin/aipman install firefox
+fi
+
+# Install vim plug
+
+if [ ! -f "\$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+    echo "Setting up nvim..."
+    pip install neovim
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    nvim -c "PlugInstall" -c "qa\!"
 fi
 
 # User configuration
