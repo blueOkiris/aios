@@ -58,19 +58,6 @@ chkconfig
 %end
 
 %post
-
-# FIXME: it'd be better to get this installed from a package
-cat > /etc/rc.d/init.d/livesys << EOF
-#!/bin/bash
-#
-# live: Init script for live image
-#
-# chkconfig: 345 00 99
-# description: Init script for live image.
-### BEGIN INIT INFO
-# X-Start-Before: display-manager chronyd
-### END INIT INFO
-
 # MODIFICATION:
 # Ensure polkit is set up properly
 getent group polkitd >/dev/null \
@@ -88,6 +75,17 @@ getent passwd polkitd >/dev/null \
         || echo -e "\e[1;31mAdding polkitd user FAILED\e[0m"; \
     }
 
+# FIXME: it'd be better to get this installed from a package
+cat > /etc/rc.d/init.d/livesys << EOF
+#!/bin/bash
+#
+# live: Init script for live image
+#
+# chkconfig: 345 00 99
+# description: Init script for live image.
+### BEGIN INIT INFO
+# X-Start-Before: display-manager chronyd
+### END INIT INFO
 
 . /etc/init.d/functions
 
