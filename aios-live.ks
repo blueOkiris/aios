@@ -5,12 +5,13 @@
 
 %include fedora-live-base.ks
 %include fedora-live-minimization.ks
-%include fedora-i3-common.ks
+%include aios-desktop.ks
+%include aios-setup.ks
 
 %post
 
-# Remixc
-sed -i -e 's/Generic release/AIOS Fedora Remix/g' /etc/fedora-release /etc/issue
+# Remix
+sed -i -e 's/Generic release/AppImageOS 37 release/g' /etc/fedora-release /etc/issue
 
 # create /etc/sysconfig/desktop (needed for installation)
 
@@ -44,7 +45,7 @@ restorecon -R /home/liveuser
 echo "/usr/bin/feh --bg-scale /usr/share/backgrounds/default.png" >> /home/liveuser/.profile
 
 # echoing type liveinst to start the installer
-echo "echo 'Please type liveinst and press Enter to start the installer'" >> /home/liveuser/.bashrc
+echo "echo 'Please type liveinst and press Enter to start the installer'" >> /home/liveuser/.zshrc
 
 # fixing the installer non opening bug
 echo "xhost si:localuser:root" >> /home/liveuser/.profile
@@ -52,4 +53,5 @@ echo "xhost si:localuser:root" >> /home/liveuser/.profile
 EOF
 
 %end
+
 
