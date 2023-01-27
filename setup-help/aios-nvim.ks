@@ -1,8 +1,6 @@
 # Author(s): Dylan Turner <dylantdmt@gmail.com>
 # Description: Set up nvim config
 
-%include setup-help/aios-nvim-vimplug.ks
-
 %post
 
 mkdir -p /home/liveuser/.config/nvim
