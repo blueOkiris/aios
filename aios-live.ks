@@ -14,7 +14,8 @@
 sed -i -e 's/Generic release/AppImageOS 37 release/g' /etc/fedora-release /etc/issue
 
 # Fix avahi daemon
-adduser --system --shell /bin/false --home /var/run/avahi --disabled-password avahi
+adduser --system --shell /bin/false --home /var/run/avahi avahi
+sed -i -e 's/#disallow-other-stacks=no/disallow-other-stacks=yes/g' /etc/avahi/avahi-daemon.conf
 
 # Ensure polkit is set up properly
 getent group polkitd >/dev/null \
@@ -31,6 +32,9 @@ getent passwd polkitd >/dev/null \
         && echo -e "\e[1;33mAdded missing polkitd user\e[0m" \
         || echo -e "\e[1;31mAdding polkitd user FAILED\e[0m"; \
     }
+
+# Fix internet
+systemctl enable systemd-resolved
 
 # Create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
