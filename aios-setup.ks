@@ -6,6 +6,7 @@
 %include setup-help/aios-xfce4-panel.ks
 %include setup-help/aios-alacritty.ks
 %include setup-help/aios-nvim.ks
+%include setup-help/aios-gtk-theme.ks
 
 %post
 
