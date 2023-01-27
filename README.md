@@ -24,7 +24,7 @@ Run
 sudo ksflatten -c aios-live.ks -o flatten.ks \
     && sudo livemedia-creator --make-iso --ks flatten.ks \
         --iso-only --no-virt \
-        --iso-name AppImageOS-37-x86_64.iso --releasever 37 \
+        --iso-name AppImageOS-37-x86_64.iso --releasever 37 --fs-label AppImage-OS-37 \
         --tmp tmp
 ```
 
