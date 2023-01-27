@@ -5,6 +5,7 @@
 
 # Desktop packages
 @^i3-desktop-environment
+i3gaps
 feh
 rofi
 pavucontrol
