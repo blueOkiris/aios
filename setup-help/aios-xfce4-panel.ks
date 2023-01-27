@@ -51,26 +51,19 @@ colorC=rgb(255,0,0)
 command_on_low=
 command_on_critical=
 EOF
-cat > /home/liveuser/.config/xfce4/panel/datetime-10.rc << EOF
-layout=3
-date_font=Bitstream Vera Sans 8
-time_font=Bitstream Vera Sans 12
-date_format=%Y-%m-%d
-time_format=%l:%M:%S %P
-EOF
 cat > /home/liveuser/.config/xfce4/panel/datetime-7.rc << EOF
 layout=2
-date_font=Bitstream Vera Sans 12
-time_font=Bitstream Vera Sans 8
+date_font=Noto Sans 10
+time_font=Noto Sans 10
 date_format=%a, %b %d, %Y
-time_format=%H:%M
+time_format=%l:%M:%S %P
 EOF
 cat > /home/liveuser/.config/xfce4/panel/datetime-9.rc << EOF
-layout=2
-date_font=Bitstream Vera Sans 12
-time_font=Bitstream Vera Sans 8
+layout=3
+date_font=Noto Sans 10
+time_font=Noto Sans 10
 date_format=%a, %b %d, %Y
-time_format=%H:%M
+time_format=%l:%M:%S %P
 EOF
 cat > /home/liveuser/.config/xfce4/panel/fsguard-12.rc << EOF
 yellow=8
@@ -122,8 +115,6 @@ cat > /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml <<
         <value type="int" value="10"/>
         <value type="int" value="12"/>
         <value type="int" value="13"/>
-        <value type="int" value="14"/>
-        <value type="int" value="11"/>
         <value type="int" value="7"/>
         <value type="int" value="15"/>
         <value type="int" value="9"/>
@@ -154,21 +145,11 @@ cat > /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml <<
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
         <value type="string" value="thunar"/>
-        <value type="string" value="nextcloud"/>
         <value type="string" value="blueman"/>
         <value type="string" value="no network connection"/>
-        <value type="string" value="megasync"/>
-        <value type="string" value="nxclient.bin"/>
         <value type="string" value="ethernet network connection “default profile” active"/>
       </property>
       <property name="known-items" type="array">
-        <value type="string" value="obs"/>
-        <value type="string" value="MEGAsync"/>
-        <value type="string" value="Microsoft Teams - Insiders1"/>
-        <value type="string" value="zoom"/>
-        <value type="string" value="discord1"/>
-        <value type="string" value="Nextcloud"/>
-        <value type="string" value="steam"/>
         <value type="string" value="blueman"/>
       </property>
     </property>
@@ -177,9 +158,6 @@ cat > /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml <<
       <property name="show-notifications" type="bool" value="true"/>
       <property name="mpris-players" type="string" value="firefox.instance25229;firefox.instance3949;firefox.instance437631;firefox.instance4794;firefox.instance49613;firefox.instance5519;firefox.instance6638;firefox.instance7072;firefox.instance8884;spotify"/>
     </property>
-    <property name="plugin-11" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-    </property>
     <property name="plugin-13" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
@@ -187,7 +165,6 @@ cat > /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml <<
     <property name="plugin-9" type="string" value="datetime"/>
     <property name="plugin-10" type="string" value="battery"/>
     <property name="plugin-12" type="string" value="fsguard"/>
-    <property name="plugin-14" type="string" value="fsguard"/>
     <property name="plugin-15" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
