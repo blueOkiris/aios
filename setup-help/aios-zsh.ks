@@ -14,7 +14,7 @@ fi
 export fpath=(\$HOME/.zsh-completions/src \$fpath)
 autoload -U compinit && compinit
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/shhare/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Theme
 
