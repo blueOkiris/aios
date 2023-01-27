@@ -47,7 +47,7 @@ papirus-icon-theme
 cargo
 
 # Keyring/password stuff
-gnome-keyring-pam
+-gnome-keyring
 polkit-kde
 
 # Admin tools are handy to have
