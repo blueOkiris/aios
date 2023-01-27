@@ -1,6 +1,5 @@
 # Author(s): Dylan Turner <dylantdmt@gmail.com>
-# Description:
-# - Install i3 and packages for theming/system
+# Description: Packages for live system
 
 %packages
 
@@ -52,11 +51,11 @@ polkit-kde
 @admin-tools
 wget
 trash-cli
+git
 zsh
 
 # Setup
 util-linux-user
-git
 
 # Save some space
 -autofs
