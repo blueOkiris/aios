@@ -47,7 +47,7 @@ papirus-icon-theme
 cargo
 
 # Keyring/password stuff
--gnome-keyring
+gnome-keyring-pam
 polkit-kde
 
 # Admin tools are handy to have
@@ -74,7 +74,6 @@ util-linux-user
 -libwayland
 -firefox
 -flatpak
--sudo
 -gnome-disk-utility
 
 # Rebranding
