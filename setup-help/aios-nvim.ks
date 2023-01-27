@@ -1,7 +1,7 @@
 # Author(s): Dylan Turner <dylantdmt@gmail.com>
 # Description: Set up nvim config
 
-%include aios-nvim-vimplug.ks
+%include setup-help/aios-nvim-vimplug.ks
 
 %post
 
