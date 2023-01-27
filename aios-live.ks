@@ -57,7 +57,6 @@ sed -i 's/^#user-session=.*/user-session=i3/' /etc/lightdm/lightdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
-mkdir /home/liveuser/Desktop
 
 # This goes at the end after all other changes.
 chown -R liveuser:liveuser /home/liveuser
