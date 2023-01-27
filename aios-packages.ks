@@ -4,6 +4,9 @@
 %packages
 
 # Desktop packages
+@i3-desktop-environment
+-i3
+-i3-config-fedora
 i3-gaps
 feh
 rofi
@@ -31,7 +34,6 @@ thunar-volman
 alacritty
 neovim
 gnome-screenshot
-google-noto-sans-fonts
 
 # Theming
 arc-theme
@@ -76,9 +78,9 @@ util-linux-user
 -gnome-disk-utility
 -gnome-system-monitor
 -system-config-printer
--@^admin-tools
--@^fonts
--@^input-methods
+-@admin-tools
+-@fonts
+-@input-methods
 
 # Rebranding
 -fedora-logos
