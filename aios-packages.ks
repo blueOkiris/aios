@@ -5,6 +5,7 @@
 
 # Desktop packages
 @^i3-desktop-environment
+-i3
 i3-gaps
 feh
 rofi
