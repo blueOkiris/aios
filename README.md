@@ -16,6 +16,8 @@ On top of that, we strive to bring you a customized desktop environment built ar
 
 You will need `Fedora`, `lorax`, and `pykickstart`
 
+Probably want to build in a VM or container (so you don't accidentally write over your own system or something), but I didn't, so...
+
 Run:
 
 ```
