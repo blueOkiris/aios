@@ -19,6 +19,7 @@ if [ -d "\$HOME/.oh-my-zsh" ]; then
 else
     git clone https://github.com/blueOkiris/aios /tmp/aios
     cp -r /tmp/aios/.oh-my-zsh \$HOME/.oh-my-zsh
+    mv \$HOME/.oh-my-zsh/git \$HOME/.oh-my-zsh/.git
     chown -R \$USER:\$USER \$HOME/.oh-my-zsh
 
     if [ -d "\$HOME/.oh-my-zsh" ]; then
