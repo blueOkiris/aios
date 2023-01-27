@@ -125,7 +125,7 @@ gaps outer 0
 smart_gaps on
 
 # Start-up stuff
-exec_always --no-startup-id sh -c 'if [ -d \$HOME/Applications/i3-alternating-layout ]; then python \$HOME/Applications/i3-alternating-layout/alternating_layouts.py else pip install i3ipc; mkdir -p \$HOME/Applications; git clone https://github.com/olemartinorg/i3-alternating-layout \$HOME/Applications/i3-alternating-layout; python \$HOME/Applications/i3-alternating-layout/alternating_layouts.py; fi'
+exec_always --no-startup-id sh -c 'if [ -d \$HOME/Applications/i3-alternating-layout ]; then python \$HOME/Applications/i3-alternating-layout/alternating_layouts.py else mkdir -p \$HOME/Applications; git clone https://github.com/olemartinorg/i3-alternating-layout \$HOME/Applications/i3-alternating-layout; python \$HOME/Applications/i3-alternating-layout/alternating_layouts.py; fi'
 exec_always --no-startup-id /usr/libexec/kf5/polkit-kde-authentication-agent-1
 exec --no-startup-id xfce4-panel --disable-wm-check
 exec_always --no-startup-id nm-applet

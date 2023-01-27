@@ -51,24 +51,22 @@ PROMPT='%(!.%B%F{red}.%B%F{green}%n@)%m %F{blue}%(!.%1~.%~) ${vcs_info_msg_0_}%F
 
 # Install package manager
 
-if [ ! -f "\$HOME/.cargo/bin/aipman" ]; then
-    echo "Installing the aip-man..."
-    cargo install aipman
-    \$HOME/.cargo/bin/aipman install appimaged
+if [ ! -f "\$HOME/Applications/appimaged-*" ]; then
+    echo "Installing the appimaged..."
+    aipman install appimaged
     chmod +x \$HOME/Applications/appimaged-*.AppImage
-    \$HOME/.cargo/bin/aipman run appimaged
+    aipman run appimaged
 
     echo "Installing Firefox with `aipman install firefox`!"
-    \$HOME/.cargo/bin/aipman install firefox
+    aipman install firefox
 fi
 
 # Install vim plug
 
 if [ ! -f "\$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
     echo "Setting up nvim..."
-    pip install neovim
     curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    nvim -c "PlugInstall" -c "qa\!"
+    nvim -c "PlugInstall || qa\!"
 fi
 
 # User configuration

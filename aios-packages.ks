@@ -41,8 +41,7 @@ breeze-cursor-theme
 papirus-icon-theme
 
 # Used to install aip-man
-cargo
-openssl-devel
+https://github.com/blueOkiris/aip-man/releases/download/v6/aipman-6.0.0-1.fc37.x86_64.rpm
 
 # Keyring/password stuff
 -gnome-keyring
@@ -55,7 +54,8 @@ zsh-syntax-highlighting
 zsh-autosuggestions
 
 # For nvim
-python-pip
+python-i3ipc
+python-neovim
 nodejs
 
 # Setup
