@@ -6,8 +6,6 @@
 #
 # Does includes "default" language configuration (kickstarts including
 # this template can override these settings)
-#
-# Modifications by: Dylan Turner <dylantdmt@gmail.com>
 
 lang en_US.UTF-8
 keyboard us
