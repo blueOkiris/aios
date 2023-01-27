@@ -56,7 +56,7 @@ if [ ! -f "\$HOME/.cargo/bin/aipman" ]; then
     cargo install aipman
     \$HOME/.cargo/bin/aipman install appimaged
     chmod +x \$HOME/Applications/appimaged-*.AppImage
-    \$HOME/.cargo/bin/aipman run appimaged-*.AppImage
+    \$HOME/.cargo/bin/aipman run appimaged
 
     echo "Installing Firefox with `aipman install firefox`!"
     \$HOME/.cargo/bin/aipman install firefox
