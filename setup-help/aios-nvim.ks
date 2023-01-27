@@ -152,30 +152,7 @@ set foldmethod=indent
 EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
-
-# Install vim-plug before running
-mkdir -p /home/liveuser/.local/share/nvim/site/autoload
-wget \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
-    -o /home/liveuser/.local/share/nvim/site/autoload/plug.vim
-
-chown -R liveuser:liveuser /home/liveuser/.local/share/nvim/
-mkdir -p /root/.local/share/nvim/site/autoload/plug.vim
-cp \
-    /home/liveuser/.local/share/nvim/autoload/plug.vim \
-    /root/.local/share/nvim/autoload/plug.vim
-
 chown -R liveuser:liveuser /home/liveuser/.config/nvim
-
-mkdir -p /root/.config/nvim
-cp /home/liveuser/.config/nvim/init.vim /root/.config/nvim/init.vim
-
-# Set up neovim
-su liveuser -c "pip install neovim"
-su liveuser -c "nvim -c 'PlugInstall' -c 'qa\!'"
-pip install neovim
-nvim -c "PlugInstall" -c "qa\!"
-
 EOF
 
 %end
