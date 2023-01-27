@@ -6,6 +6,7 @@
 # Desktop packages
 @^i3-desktop-environment
 -i3
+-i3-config-fedora
 i3-gaps
 feh
 rofi
