@@ -131,6 +131,11 @@ exec_always --no-startup-id /usr/libexec/kf5/polkit-kde-authentication-agent-1
 exec --no-startup-id xfce4-panel --disable-wm-check
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id blueman-applet
+
+# Live install launching
+exec --no-startup-id sh -c 'if [ "$USER" = "liveuser" ]; then liveinst; fi'
+for_window [ title="Anaconda Installer" ] floating enable
+
 EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
