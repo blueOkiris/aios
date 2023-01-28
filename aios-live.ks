@@ -6,7 +6,6 @@
 %include fedora-live-base.ks
 %include fedora-live-minimization.ks
 %include aios-packages.ks
-%include aios-setup.ks
 
 %post
 

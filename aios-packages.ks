@@ -17,6 +17,15 @@ xfce4-pulseaudio-plugin
 xfce4-fsguard-plugin
 xfce4-battery-plugin
 
+# AIOS Specific
+aipman
+aios-themer
+
+# Theming
+arc-theme
+breeze-cursor-theme
+papirus-icon-theme
+
 # Networking
 NetworkManager-openconnect-gnome
 NetworkManager-openvpn-gnome
@@ -35,13 +44,12 @@ alacritty
 neovim
 gnome-screenshot
 
-# Theming
-arc-theme
-breeze-cursor-theme
-papirus-icon-theme
-
-# Used to install aip-man
-https://github.com/blueOkiris/aip-man/releases/download/v6/aipman-6.0.0-1.fc37.x86_64.rpm
+# For nvim
+python-i3ipc
+python-neovim
+nodejs
+yarnpkg
+cargo
 
 # Keyring/password stuff
 -gnome-keyring
@@ -52,14 +60,10 @@ git
 zsh
 zsh-syntax-highlighting
 zsh-autosuggestions
-
-# For nvim
-python-i3ipc
-python-neovim
-nodejs
-
-# Setup
+coreutils
+trash-cli
 util-linux-user
+sqlite
 
 # Save some space
 -autofs
@@ -78,9 +82,9 @@ util-linux-user
 -gnome-disk-utility
 -gnome-system-monitor
 -system-config-printer
--@admin-tools
 -@fonts
 -@input-methods
+-@admin-tools
 
 # Rebranding
 -fedora-logos
