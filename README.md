@@ -25,14 +25,13 @@ sudo ksflatten -c aios-live.ks -o flatten.ks \
     && sudo livemedia-creator --make-iso --ks flatten.ks \
         --iso-only --no-virt \
         --iso-name AppImageOS-37-x86_64.iso --releasever 37 --fs-label AppImage-OS-37 \
-        --tmp tmp
+        --tmp tmp --resultdir result
 ```
 
 to build it, and then
 
 ```
-sudo cp tmp/<whatever lmc-* folder it's in>/AppImageOS-37-x86_64.iso .
-sudo chown $USER:$USER AppImageOS-37-x86_64.iso
+sudo cp result/AppImageOS-37-x86_64.iso . && sudo chown $USER:$USER AppImageOS-37-x86_64.iso
 ```
 
 to copy it to the current dir and allow you to run it.
