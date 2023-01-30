@@ -6,4 +6,5 @@ flatten.ks
 *.log
 tmp/
 anaconda/
+result/
 
