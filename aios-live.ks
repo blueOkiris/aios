@@ -10,7 +10,26 @@
 %post
 
 # Remix
-sed -i -e 's/Generic release/AppImageOS 37 release/g' /etc/fedora-release /etc/issue
+sed -i -e 's/Generic release/AppImageOS release/g' /etc/fedora-release /etc/issue
+sed -i -e 's/Generic/Thirty Seven/g' /etc/fedora-release /etc/issue
+cat > /usr/lib/os-release << EOF
+NAME="AOIS"
+VERSION="37"
+ID=aios
+VERSION_ID=37
+PRETTY_NAME="AppImage OS 37"
+ANSI_COLOR="0;34"
+LOGO=generic-logo-icon
+CPE_NAME="cpe:/o:aios:aios:37"
+DEFAULT_HOSTNAME="aios"
+HOME_URL="https://github.com/blueOkiris/aios/"
+SUPPORT_URL="https://github.com/blueOkiris/aios/"
+BUG_REPORT_URL="https://github.com/blueOkiris/aios/"
+REDHAT_BUGZILLA_PRODUCT="AIOS"
+REDHAT_BUGZILLA_PRODUCT_VERSION=37
+REDHAT_SUPPORT_PRODUCT="AIOS"
+REDHAT_SUPPORT_PRODUCT_VERSION=37
+EOF
 
 # Fix avahi daemon
 adduser --system --shell /bin/false --home /var/run/avahi avahi
