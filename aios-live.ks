@@ -31,10 +31,6 @@ REDHAT_SUPPORT_PRODUCT="AIOS"
 REDHAT_SUPPORT_PRODUCT_VERSION=37
 EOF
 
-# Fix avahi daemon
-adduser --system --shell /bin/false --home /var/run/avahi avahi
-sed -i -e 's/#disallow-other-stacks=no/disallow-other-stacks=yes/g' /etc/avahi/avahi-daemon.conf
-
 # Ensure polkit is set up properly
 getent group polkitd >/dev/null \
     && echo -e "\e[1;32mpolkitd group already exists\e[0m" \
