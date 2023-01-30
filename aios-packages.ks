@@ -25,6 +25,7 @@ trash-cli
 util-linux-user
 sqlite
 dbus-daemon
+avahi-tools
 
 # Keyring/password stuff
 -gnome-keyring
@@ -48,6 +49,7 @@ blueman
 aipman
 aipster
 aios-themer
+aios-default-appimages
 
 # User apps. TODO: Make these AppImages
 thunar
@@ -55,7 +57,6 @@ thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
 alacritty
-neovim
 gnome-screenshot
 
 # For nvim
