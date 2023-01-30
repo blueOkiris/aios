@@ -6,6 +6,9 @@
 #
 # Does includes "default" language configuration (kickstarts including
 # this template can override these settings)
+#
+# This file is based on the default one and all modifications after
+# the default have been made explicit
 
 lang en_US.UTF-8
 keyboard us
@@ -30,15 +33,20 @@ kernel
 kernel-modules
 kernel-modules-extra
 
+# MODIFICATION:
+# Modifier(s): Dylan Turner <dylantdmt@gmail.com>
+# Description: remove anaconda and replace with calamares
+
 # The point of a live image is to install
-anaconda
-anaconda-install-env-deps
-anaconda-live
+calamares
+
+# Still useful
 @anaconda-tools
-# Anaconda has a weak dep on this and we don't want it on livecds, see
-# https://fedoraproject.org/wiki/Changes/RemoveDeviceMapperMultipathFromWorkstationLiveCD
--fcoe-utils
--device-mapper-multipath
+
+# Explicitly list so it stays when Calamares remvoes itself
+grub2-efi-modules
+
+# END MODIFICATION
 
 # Need aajohan-comfortaa-fonts for the SVG rnotes images
 aajohan-comfortaa-fonts
@@ -172,6 +180,7 @@ passwd -d root > /dev/null
 # Description: Set zsh and theme the user
 chsh -s /usr/bin/zsh liveuser
 /usr/bin/install-default-theme
+# END MODIFICATION
 
 # turn off firstboot for livecd boots
 systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
@@ -248,14 +257,14 @@ for o in \`cat /proc/cmdline\` ; do
 done
 
 # if liveinst or textinst is given, start anaconda
-if strstr "\`cat /proc/cmdline\`" liveinst ; then
-   plymouth --quit
-   /usr/sbin/liveinst \$ks
-fi
-if strstr "\`cat /proc/cmdline\`" textinst ; then
-   plymouth --quit
-   /usr/sbin/liveinst --text \$ks
-fi
+#if strstr "\`cat /proc/cmdline\`" liveinst ; then
+#   plymouth --quit
+#   /usr/sbin/liveinst \$ks
+#fi
+#if strstr "\`cat /proc/cmdline\`" textinst ; then
+#   plymouth --quit
+#   /usr/sbin/liveinst --text \$ks
+#fi
 
 # configure X, allowing user to override xdriver
 if [ -n "\$xdriver" ]; then
