@@ -16,10 +16,19 @@ xfce4-datetime-plugin
 xfce4-pulseaudio-plugin
 xfce4-fsguard-plugin
 xfce4-battery-plugin
+git
+zsh
+zsh-syntax-highlighting
+zsh-autosuggestions
+coreutils
+trash-cli
+util-linux-user
+sqlite
+dbus-daemon
 
-# AIOS Specific
-aipman
-aios-themer
+# Keyring/password stuff
+-gnome-keyring
+polkit-kde
 
 # Theming
 arc-theme
@@ -34,6 +43,11 @@ NetworkManager-ssh-gnome
 network-manager-applet
 nm-connection-editor
 blueman
+
+# AIOS Specific
+aipman
+aipster
+aios-themer
 
 # User apps. TODO: Make these AppImages
 thunar
@@ -50,20 +64,6 @@ python-neovim
 nodejs
 yarnpkg
 cargo
-
-# Keyring/password stuff
--gnome-keyring
-polkit-kde
-
-# Admin tools are handy to have
-git
-zsh
-zsh-syntax-highlighting
-zsh-autosuggestions
-coreutils
-trash-cli
-util-linux-user
-sqlite
 
 # Save some space
 -autofs
@@ -85,6 +85,8 @@ sqlite
 -@fonts
 -@input-methods
 -@admin-tools
+-dracut-config-rescue
+dracut-config-generic
 
 # Rebranding
 -fedora-logos
