@@ -178,8 +178,17 @@ passwd -d root > /dev/null
 # MODIFICATION:
 # Modifier: Dylan Turner <dylantdmt@gmail.com>
 # Description: Set zsh and theme the user
+
+# Fix avahi daemon
+adduser --system --shell /bin/false --home /var/run/avahi avahi
+sed -i -e 's/#disallow-other-stacks=no/disallow-other-stacks=yes/g' /etc/avahi/avahi-daemon.conf
+systemctl stop avahi-daemon.socket
+systemctl stop avahi-daemon.service
+
 chsh -s /usr/bin/zsh liveuser
 /usr/bin/install-default-theme
+su liveuser -c "aipman run appimaged"
+
 # END MODIFICATION
 
 # turn off firstboot for livecd boots
