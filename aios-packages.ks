@@ -60,6 +60,7 @@ alacritty
 gnome-screenshot
 
 # For nvim
+-neovim
 python-i3ipc
 python-neovim
 nodejs
