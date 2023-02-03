@@ -52,17 +52,10 @@ aios-themer
 aios-default-appimages
 
 # User apps. TODO: Make these AppImages
-thunar
-thunar-archive-plugin
-thunar-media-tags-plugin
-thunar-volman
-alacritty
 gnome-screenshot
 
 # For nvim
--neovim
 python-i3ipc
-python-neovim
 nodejs
 yarnpkg
 cargo
