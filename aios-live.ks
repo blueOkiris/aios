@@ -82,7 +82,7 @@ restorecon -R /home/liveuser
 # Setting the wallpaper
 echo "/usr/bin/feh --bg-scale /usr/share/backgrounds/default.png" >> /home/liveuser/.profile
 
-echo "echo 'Type calamares and hit enter to start the installer.'" >> /home/liveuser/.zshrc
+echo "echo 'Type sudo calamares and hit enter to start the installer.'" >> /home/liveuser/.zshrc
 
 # Fixing the installer non opening bug
 echo "xhost si:localuser:root" >> /home/liveuser/.profile
