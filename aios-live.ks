@@ -9,6 +9,9 @@
 
 %post
 
+# Fix for mupdf for some reason???
+ln -s /usr/lib64/libbz2.so.1.0.8 /usr/lib64/libbz2.so.1.0
+
 # Remix
 sed -i -e 's/Generic release/AppImageOS release/g' /etc/fedora-release /etc/issue
 sed -i -e 's/Generic/Thirty Seven/g' /etc/fedora-release /etc/issue
@@ -79,8 +82,7 @@ restorecon -R /home/liveuser
 # Setting the wallpaper
 echo "/usr/bin/feh --bg-scale /usr/share/backgrounds/default.png" >> /home/liveuser/.profile
 
-# Echoing type liveinst to start the installer
-echo "echo 'Please type liveinst and press Enter to start the installer'" >> /home/liveuser/.zshrc
+echo "echo 'Type calamares and hit enter to start the installer.'" >> /home/liveuser/.zshrc
 
 # Fixing the installer non opening bug
 echo "xhost si:localuser:root" >> /home/liveuser/.profile
