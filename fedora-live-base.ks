@@ -65,6 +65,64 @@ chkconfig
 
 %post
 
+# MODIFICATION:
+# Modifier(s): Dylan Turner <dylantdmt@gmail.com>
+# Description: Fix avahi
+
+adduser --system --shell /bin/false --home /var/run/avahi avahi
+#sed -i -e 's/#disallow-other-stacks=no/disallow-other-stacks=yes/g' /etc/avahi/avahi-daemon.conf
+sed -i e \
+    's/<policy-context="default">/<policy-context="default"><allow own="org.freedesktop.Avahi"/>' \
+    /etc/dbus-1/system.d/avahi-dbus.conf
+
+cat > /etc/dbus-1/system.d/avahi-dbus.conf << EOF
+<!DOCTYPE busconfig PUBLIC
+          "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+          "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+
+  <!-- Only root or user avahi can own the Avahi service -->
+  <policy user="avahi">
+    <allow own="org.freedesktop.Avahi"/>
+  </policy>
+  <policy user="root">
+    <allow own="org.freedesktop.Avahi"/>
+  </policy>
+
+  <!-- Allow anyone to invoke methods on Avahi server, except SetHostName -->
+  <policy context="default">
+    <allow send_destination="org.freedesktop.Avahi"/>
+    <allow receive_sender="org.freedesktop.Avahi"/>
+
+    <allow own="org.freedesktop.Avahi"/>
+
+    <deny send_destination="org.freedesktop.Avahi"
+          send_interface="org.freedesktop.Avahi.Server" send_member="SetHostName"/>
+  </policy>
+
+  <!-- Allow everything, including access to SetHostName to users of the group "avahi" -->
+  <policy group="avahi">
+    <allow send_destination="org.freedesktop.Avahi"/>
+    <allow receive_sender="org.freedesktop.Avahi"/>
+  </policy>
+  <policy user="root">
+    <allow send_destination="org.freedesktop.Avahi"/>
+    <allow receive_sender="org.freedesktop.Avahi"/>
+  </policy>
+</busconfig>
+EOF
+
+# END MODIFICAION
+
+# MODIFICATION:
+# Modifier(s): Dylan Turner <dylantdmt@gmail.com>
+# Description: Fix dbus
+
+chown root:dbus /usr/libexec/dbus-1/dbus-daemon-launch-helper
+chmod 4750 /usr/libexec/dbus-1/dbus-daemon-launch-helper
+
+# END MODIFICAION
+
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
 #!/bin/bash
@@ -179,15 +237,15 @@ passwd -d root > /dev/null
 # Modifier: Dylan Turner <dylantdmt@gmail.com>
 # Description: Set zsh and theme the user
 
-# Fix avahi daemon
-adduser --system --shell /bin/false --home /var/run/avahi avahi
-sed -i -e 's/#disallow-other-stacks=no/disallow-other-stacks=yes/g' /etc/avahi/avahi-daemon.conf
-systemctl stop avahi-daemon.socket
-systemctl stop avahi-daemon.service
+systemctl stop avahi-daemon
 
+# Install themes
 chsh -s /usr/bin/zsh liveuser
 /usr/bin/install-default-theme
 su liveuser -c "aipman run appimaged"
+
+# Restart avahi
+systemctl start avahi-daemon
 
 # END MODIFICATION
 
