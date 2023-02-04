@@ -48,8 +48,7 @@ blueman
 # AIOS Specific
 aipman
 aipster
-aios-themer
-aios-default-appimages
+aios-theme
 
 # User apps. TODO: Make these AppImages
 gnome-screenshot
