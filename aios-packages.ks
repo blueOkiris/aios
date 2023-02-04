@@ -79,8 +79,7 @@ cargo
 -@fonts
 -@input-methods
 -@admin-tools
--dracut-config-rescue
-dracut-config-generic
+dracut-config-rescue
 
 # Rebranding
 -fedora-logos
