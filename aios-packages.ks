@@ -26,6 +26,7 @@ util-linux-user
 sqlite
 dbus-daemon
 avahi-tools
+python3-pip
 
 # Keyring/password stuff
 -gnome-keyring
