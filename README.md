@@ -47,8 +47,7 @@ Do this via:
 
 ```
 cd /var/www/html/aios-pkgs
-sudo -u apache wget https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aios-default-appimages-1.0.0-12.fc37.x86_64.rpm
-sudo -u apache wget https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aios-themer-1.0.0-22.fc37.x86_64.rpm
+sudo -u apache wget https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aios-theme-1.0.0-1.fc37.x86_64.rpm
 sudo -u apache wget https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aipman-6.0.0-1.fc37.x86_64.rpm
 sudo -u https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aipster-2.0.0-1.fc37.x86_64.rpm
 ```
