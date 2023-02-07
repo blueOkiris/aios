@@ -52,6 +52,9 @@ getent passwd polkitd >/dev/null \
 # Fix internet
 systemctl enable systemd-resolved
 
+# Theme the final user
+systemctl enable aios-theme
+
 # Create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/i3
