@@ -12,6 +12,8 @@ AIOS uses AppImages and custom AppImage package manager to install software, and
 
 On top of that, we strive to bring you a customized desktop environment built around the wonderful i3 window manager with nice theming out-of-the-box.
 
+Please read the manual (installed to your Documents folder) to learn everything you'll need to know!
+
 ## Building the Live ISO
 
 You will need `Fedora`, `lorax`, and `pykickstart` as well as `httpd` and `createrepo`
