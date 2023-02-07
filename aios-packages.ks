@@ -5,9 +5,6 @@
 
 # Desktop packages
 @i3-desktop-environment
--i3
--i3-config-fedora
-i3-gaps
 feh
 rofi
 dex-autostart
@@ -27,9 +24,11 @@ sqlite
 dbus-daemon
 avahi-tools
 python3-pip
+wget
+@admin-tools
 
 # Keyring/password stuff
--gnome-keyring
+gnome-keyring-pam
 polkit-kde
 
 # Theming
@@ -53,6 +52,8 @@ aios-theme
 
 # User apps. TODO: Make these AppImages
 gnome-screenshot
+gnome-system-monitor
+system-config-printer
 
 # For nvim
 python-i3ipc
@@ -61,33 +62,22 @@ yarnpkg
 cargo
 
 # Save some space
--autofs
--acpid
 -gimp-help
 -desktop-backgrounds-basic
--aspell-*                   # dictionaries are big
 -gnome-terminal
 -gnome-photos
 -gnome-backgrounds
 -gnome-icon-theme
 -gnome-text-editor
--libwayland
 -firefox
 -flatpak
--gnome-disk-utility
--gnome-system-monitor
--system-config-printer
--@fonts
--@input-methods
--@admin-tools
-dracut-config-rescue
 
 # Rebranding
--fedora-logos
--fedora-release
--fedora-release-notes
-generic-release
-generic-logos
-generic-release-notes
+#-fedora-logos
+#-fedora-release
+#-fedora-release-notes
+#generic-release
+#generic-logos
+#generic-release-notes
 
 %end
