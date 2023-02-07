@@ -45,17 +45,6 @@ anaconda-live
 -fcoe-utils
 -device-mapper-multipath
 
-# MODIFICATION:
-# Modifier(s): Dylan Turner <dylantdmt@gmail.com>
-# Description: Make sure all boot stuff is installed
-grubby
-grub2-common
-grub2-efi
-grub2-breeze-theme
-grub2-tools
-grub2-tools-extra
-# END MODIFICATION
-
 # Need aajohan-comfortaa-fonts for the SVG rnotes images
 aajohan-comfortaa-fonts
 
@@ -231,7 +220,6 @@ fi
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
 usermod -aG wheel liveuser > /dev/null
-systemctl enable aios-theme.service
 
 # Remove root password lock
 passwd -d root > /dev/null
