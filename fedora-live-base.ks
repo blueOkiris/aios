@@ -18,7 +18,7 @@ firewall --enabled --service=mdns
 xconfig --startxonboot
 zerombr
 clearpart --all
-part / --size 5120 --fstype ext4
+part / --size 7168 --fstype btrfs
 services --enabled=NetworkManager,ModemManager --disabled=sshd
 network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
@@ -32,20 +32,28 @@ shutdown
 kernel
 kernel-modules
 kernel-modules-extra
+kernel-devel
+kernel-headers
+
+# The point of a live image is to install
+anaconda
+anaconda-install-env-deps
+anaconda-live
+@anaconda-tools
+# Anaconda has a weak dep on this and we don't want it on livecds, see
+# https://fedoraproject.org/wiki/Changes/RemoveDeviceMapperMultipathFromWorkstationLiveCD
+-fcoe-utils
+-device-mapper-multipath
 
 # MODIFICATION:
 # Modifier(s): Dylan Turner <dylantdmt@gmail.com>
-# Description: remove anaconda and replace with calamares
-
-# The point of a live image is to install
-calamares
-
-# Still useful
-@anaconda-tools
-
-# Explicitly list so it stays when Calamares remvoes itself
-grub2-efi-modules
-
+# Description: Make sure all boot stuff is installed
+grubby
+grub2-common
+grub2-efi
+grub2-breeze-theme
+grub2-tools
+grub2-tools-extra
 # END MODIFICATION
 
 # Need aajohan-comfortaa-fonts for the SVG rnotes images
@@ -111,12 +119,6 @@ cat > /etc/dbus-1/system.d/avahi-dbus.conf << EOF
   </policy>
 </busconfig>
 EOF
-
-# END MODIFICAION
-
-# MODIFICATION:
-# Modifier(s): Dylan Turner <dylantdmt@gmail.com>
-# Description: Fix dbus
 
 chown root:dbus /usr/libexec/dbus-1/dbus-daemon-launch-helper
 chmod 4750 /usr/libexec/dbus-1/dbus-daemon-launch-helper
@@ -229,6 +231,7 @@ fi
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
 usermod -aG wheel liveuser > /dev/null
+systemctl enable aios-theme.service
 
 # Remove root password lock
 passwd -d root > /dev/null
@@ -237,15 +240,10 @@ passwd -d root > /dev/null
 # Modifier: Dylan Turner <dylantdmt@gmail.com>
 # Description: Set zsh and theme the user
 
-systemctl stop avahi-daemon
-
 # Install themes
 chsh -s /usr/bin/zsh liveuser
 /usr/bin/install-default-theme
 su liveuser -c "aipman run appimaged"
-
-# Restart avahi
-systemctl start avahi-daemon
 
 # END MODIFICATION
 
@@ -324,14 +322,14 @@ for o in \`cat /proc/cmdline\` ; do
 done
 
 # if liveinst or textinst is given, start anaconda
-#if strstr "\`cat /proc/cmdline\`" liveinst ; then
-#   plymouth --quit
-#   /usr/sbin/liveinst \$ks
-#fi
-#if strstr "\`cat /proc/cmdline\`" textinst ; then
-#   plymouth --quit
-#   /usr/sbin/liveinst --text \$ks
-#fi
+if strstr "\`cat /proc/cmdline\`" liveinst ; then
+   plymouth --quit
+   /usr/sbin/liveinst \$ks
+fi
+if strstr "\`cat /proc/cmdline\`" textinst ; then
+   plymouth --quit
+   /usr/sbin/liveinst --text \$ks
+fi
 
 # configure X, allowing user to override xdriver
 if [ -n "\$xdriver" ]; then
