@@ -18,6 +18,10 @@ Please read the manual (installed to your Documents folder) to learn everything 
 
 You will need `Fedora`, `lorax`, and `pykickstart` as well as `httpd` and `createrepo`
 
+### Changing Group
+
+You gotta be in the mock group to use mock, so do `sudo usermod -aG mock $(whoami)` and logout
+
 ### Setting up the AIOS package repo
 
 In order to run the installer, it has to be able to pull from a custom AIOS package repo, so you need to host a server to do it. It's not that hard I promise. Just follow along.
@@ -49,9 +53,12 @@ Do this via:
 
 ```
 cd /var/www/html/aios-pkgs
-sudo -u apache wget https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aios-theme-1.0.0-1.fc37.x86_64.rpm
-sudo -u apache wget https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aipman-6.0.0-1.fc37.x86_64.rpm
-sudo -u https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aipster-2.0.0-1.fc37.x86_64.rpm
+sudo -u apache wget \
+    https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aios-theme-1.0.0-1.fc37.x86_64.rpm
+sudo -u apache wget \
+    https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aipman-6.0.0-1.fc37.x86_64.rpm
+sudo -u apache wget \
+    https://github.com/blueOkiris/aios-pkgs/releases/download/vInfinite/aipster-2.0.0-1.fc37.x86_64.rpm
 ```
 
 Finally, we need to make sure the repo is correct, so run `sudo -u apache createrepo --update .`
@@ -60,21 +67,40 @@ Finally, we need to make sure the repo is correct, so run `sudo -u apache create
 
 First clone the repo: `git clone https://github.com/blueOkiris/aios && cd aios`
 
-Run
+Create the mock environment:
 
 ```
-sudo ksflatten -c aios-live.ks -o flatten.ks \
-    && sudo rm -rf result \
-    && sudo livemedia-creator --make-iso --ks flatten.ks \
-        --iso-only --no-virt --image-size 8192 \
-        --iso-name AppImageOS-37-x86_64.iso --releasever 37 --fs-label AppImage-OS-37 --project AppImageOS \
-        --resultdir result
+mock -r ./aios-37-x86_64.cfg --init
+mock -r ./aios-37-x86_64.cfg --install \
+    lorax pykickstart vim anaconda \
+    libblockdev-lvm libblockdev-btrfs libblockdev-loop libblockdev-swap libblockdev-mpath \
+    libblockdev-dm libblockdev-mdraid libblockdev-nvdimm libblockdev-crypto
+```
+
+Add the kick start to it:
+
+```
+ksflatten -c aios-live.ks -o flatten.ks
+cp flatten.ks /var/lib/mock/aios-37-x86_64/root/builddir/
+```
+
+Enter the shell and build:
+
+```
+mock -r ./aios-37-x86_64.cfg --shell --old-chroot --enable-network
+livemedia-creator --make-iso --ks flatten.ks \
+    --iso-only --no-virt --image-size 8192 --macboot --resultdir result \
+    --iso-name AppImageOS-37-x86_64.iso --volid AppImageOS-37 \
+    --releasever 37 --fs-label AppImage-OS-37 --project AppImageOS
+exit
 ```
 
 to build it, and then
 
 ```
-sudo cp result/AppImageOS-37-x86_64.iso . && sudo chown $USER:$USER AppImageOS-37-x86_64.iso
+sudo cp \
+    /var/lib/mock/aios-37-x86_64/root/builddir/result/AppImageOS-37-x86_64.iso . \
+    && sudo chown $USER:$USER AppImageOS-37-x86_64.iso
 ```
 
 to copy it to the current dir and allow you to run it from a VM.
