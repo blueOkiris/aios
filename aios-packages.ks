@@ -25,6 +25,10 @@ dbus-daemon
 avahi-tools
 python3-pip
 wget
+gdm
+-lightdm
+-lightdm-gtk
+-lightdm-gtk-greeter-settings
 @admin-tools
 
 # Keyring/password stuff
@@ -71,6 +75,7 @@ cargo
 -gnome-text-editor
 -firefox
 -flatpak
+-xfce4-terminal
 
 # Rebranding
 #-fedora-logos
