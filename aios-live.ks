@@ -58,7 +58,7 @@ systemctl enable aios-theme
 # Create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/i3
-DISPLAYMANAGER=/usr/sbin/lightdm
+DISPLAYMANAGER=/usr/sbin/gdm
 EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
@@ -66,13 +66,16 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 # Deactivate xfconf-migration (#683161)
 rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
 
-# Set up lightdm autologin
-sed -i 's/^#autologin-user=.*/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
-sed -i 's/^#autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/lightdm.conf
-#sed -i 's/^#show-language-selector=.*/show-language-selector=true/' /etc/lightdm/lightdm-gtk-greeter.conf
-
-# Set i3 as default session, otherwise login will fail
-sed -i 's/^#user-session=.*/user-session=i3/' /etc/lightdm/lightdm.conf
+# Set up gdm auto login
+cat > /etc/gdm/custom.conf << FOE
+[daemon]
+AutomaticLoginEnable=True
+AutomaticLogin=liveuser
+FOE
+rm /usr/share/xsessions/gnome.desktop
+rm /usr/share/xsessions/gnome-xorg.desktop
+rm /usr/share/wayland-sessions/gnome-wayland.desktop
+rm /usr/share/wayland-sessions/gnome.desktop
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
